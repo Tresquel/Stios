@@ -7,6 +7,6 @@ This is a little program im doing when im bored. Dont expect something special o
   - SimpleJSON
 
 
-**How to install**
+**How to install the requirements**
   - Install Python from [here](https://www.python.org/)
   - To install SimpleJSON: ```pip install simplejson``` (Make sure you can use pip before using this command. This can be done with `pip --version`. If it doesnt work add pip to your PATH or run pip from the folder inside python)
