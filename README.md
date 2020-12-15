@@ -1,6 +1,6 @@
 # Stios
-This is a little program im doing when im bored. Dont expect something special or magical or sum shit
-
+This is a little program im doing when im bored.
+**For now its only for Windows.**
 # Instructions
 **Requirements**
   - Python 3.8.2 or later (tho I think older versions from 3 onwards should work)
