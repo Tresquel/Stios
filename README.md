@@ -8,4 +8,4 @@ For how to edit Stios.json go to the [wiki](https://github.com/Tresquel/Stios/wi
 # Instructions
 **What do you need:**
   - [Python](https://www.python.org/) 3.8 or later (tho I think versions from 3 onwards should work too)
-  - SimpleJSON: ```pip install simplejson````
+  - SimpleJSON: ```pip install simplejson```
