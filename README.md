@@ -3,5 +3,5 @@ This is a little program im doing when im bored.
 **For now its only for Windows.**
 # Instructions
 **What do you need:**
-  - [Python](https://www.python.org/)
+  - [Python](https://www.python.org/) 3.8 or later (tho I think versions from 3 onwards should work too)
   - SimpleJSON: ```pip install simplejson````
