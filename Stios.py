@@ -1,11 +1,11 @@
-#Version 2020.12.16
+#Version 2020.12.17
 
 import os
 import simplejson as json
 
 Clear = lambda: os.system("cls")
 
-version = "2020.12.14"
+version = "2020.12.17"
 
 def Info():
     print("Stios is in very early state\nIf you encounter bugs or random crashes make an issue about them in Stios`s github page (https://github.com/Tresquel/Stios)")
@@ -30,6 +30,7 @@ def Menu():
             choiceMenu = int(choiceMenu)
             break
         else:
+            Clear()
             print("Please enter a valid number.")
             input('press Enter to continue')
     
@@ -54,6 +55,7 @@ def Settings():
             choiceSettings = int(choiceSettings)
             break
         else:
+            Clear()
             print("Please enter a valid number.")
             input('press Enter to continue')
     
@@ -72,13 +74,19 @@ def Theme():
         print('Stios, settings, theme select\n')
         print('1. Default (dark)')
         print('2. Default (light)')
+        if (settings["enablecustomtheme"] == 1):
+            print('3. ' + settings["customthemename"])
+            print('4. Edit custom theme')
+        if (settings["enablecustomtheme"] == 0):
+            print('3. Custom theme setup')
         print('0. Go back to settings')
 
         choiceTheme = input('> ')
-        if choiceTheme.isdigit() and int(choiceTheme) in {1, 2, 0}:
+        if choiceTheme.isdigit() and int(choiceTheme) in {1, 2, 3, 4, 0}:
             choiceTheme = int(choiceTheme)
             break
         else:
+            Clear()
             print("Please enter a valid number.")
             input('press Enter to continue')
         
@@ -88,10 +96,40 @@ def Theme():
     if choiceTheme == 2:
         os.system('color 70')
         settings['theme'] = 'light'
+    if (settings["enablecustomtheme"] == 1):
+        if choiceTheme == 4:
+            CustomThemeSetup()
+        if choiceTheme == 3:
+            os.system('color ' + settings["customthemecolor"])
+            settings['theme'] = 'custom'
+    if (settings["enablecustomtheme"] == 0):
+        if choiceTheme == 3:
+            CustomThemeSetup()
     if choiceTheme == 0:
         Settings()
     with open('files//Stios.json', 'w') as f:
         f.write(json.dumps(settings, indent=4 * ' '))
+def CustomThemeSetup():
+    while True:
+        lastMenu = 1
+        Clear()
+        print('Welcome to the custom theme setup!\n')
+        newTheme = input('Enter the name of the theme\n> ')
+        settings["customthemename"] = newTheme
+        Clear()
+        print('0 = Black       8 = Gray\n1 = Blue        9 = Light blue\n2 = Green       A = Light green\n3 = Aqua        B = Light aqua')
+        print('4 = Red         C = Light red\n5 = Purple      D = Light Purple\n6 = Yellow      E = Light yellow\n7 = White       F = Bright white\n')
+        print('The first value is the color of the background and the second value is responsible for text color')
+        print('For example: 01 will create Blue text on a Black background and 30 will create Black text on Aqua background')
+        newThemeColor = input('Enter the color of the theme\n> ')
+        settings["customthemecolor"] = newThemeColor
+        settings["enablecustomtheme"] = 1
+        break
+    with open('files//Stios.json', 'w') as f:
+        f.write(json.dumps(settings, indent=4 * ' '))
+    os.system('color ' + settings["customthemecolor"])
+    Settings()
+        
 
 def ChangeUsername1():
     while True:
@@ -109,6 +147,7 @@ def ChangeUsername1():
             ChangeUsername1 = int(ChangeUsername1)
             break
         else:
+            Clear()
             print("Please enter a valid number.")
             input('press Enter to continue')
         
@@ -137,6 +176,8 @@ def LoadStuff():
         os.system('color 07')
     if (settings['theme'] == "light"):
         os.system('color 70')
+    if (settings['theme'] == "custom"):
+        os.system('color ' + settings["customthemecolor"])
     with open('files//Stios.json', 'w') as f:
         f.write(json.dumps(settings, indent=4 * ' '))
     Info()  
