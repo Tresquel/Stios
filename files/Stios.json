@@ -1,5 +1,8 @@
 {
-    "version": "2020.12.16",
+    "version": "2020.12.17",
     "theme": "default",
-    "username": ""
+    "username": "",
+    "enablecustomtheme": 0,
+    "customthemename": "",
+    "customthemecolor": ""
 }
