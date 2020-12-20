@@ -1,13 +1,15 @@
-#Version 2020.12.17
+#Version 2020.12.20
 
 import os
 import simplejson as json
+import requests
 
 Clear = lambda: os.system("cls")
 
-version = "2020.12.17"
+version = "2020.12.20"
 
 def Info():
+    print('You are running Stios version ' + version + "\n\n")
     print("Stios is in very early state\nIf you encounter bugs or random crashes make an issue about them in Stios`s github page (https://github.com/Tresquel/Stios)")
     input("\nPress Enter to continue")
     Menu()
@@ -21,6 +23,8 @@ def Menu():
         else:
             username = settings['username']
         Clear()
+        if (updateAvailable == 1):
+            print("Version " + versioncheck + " is available.\n")
         print('Hello, ' + username + "!\n")
         print('1. Settings')
         print('0. Exit')
@@ -37,7 +41,7 @@ def Menu():
     
     if choiceMenu == 1:
         Settings()
-    if choiceMenu == 2:
+    if choiceMenu == 0:
         quit()
 
 
@@ -169,7 +173,8 @@ def ChangeUsername2():
             settings['username'] = newusername
             break
     with open('files//Stios.json', 'w') as f:
-        f.write(json.dumps(settings, indent=4 * ' '))
+        f.write(json.dumps(settings, indent=4 * ' '))   
+
 def LoadStuff():
     settings['version'] = version
     if (settings['theme'] == "default"):
@@ -181,8 +186,16 @@ def LoadStuff():
     with open('files//Stios.json', 'w') as f:
         f.write(json.dumps(settings, indent=4 * ' '))
     Info()  
+
+versionget = requests.get('https://pastebin.com/raw/u7Gd0wMn')
+versioncheck = versionget.text
+updateAvailable = 0
+if (versioncheck != version):
+    updateAvailable = 1
+    print('Update available ' + versioncheck + "\n")
 settings = json.load(open("files//Stios.json", 'r'))
 lastMenu = 0
+
 LoadStuff()
 while True:
     Menu()
