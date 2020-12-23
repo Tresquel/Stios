@@ -1,8 +1,12 @@
-#Version 2020.12.20
+#Version 2020.12.23
 
-import os
-import simplejson as json
-import requests
+try:
+    import os
+    import simplejson as json
+    import requests
+except:
+    os.system('pip install simplejson && pip install requests')
+    os.system('Stios.py && exit')
 
 Clear = lambda: os.system("cls")
 
