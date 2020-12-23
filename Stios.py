@@ -10,7 +10,7 @@ except:
 
 Clear = lambda: os.system("cls")
 
-version = "2020.12.20"
+version = "2020.12.23"
 
 def Info():
     print('You are running Stios version ' + version + "\n\n")
