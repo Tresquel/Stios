@@ -16,4 +16,4 @@ What is the bug?
 What did you expect to happen?
 
 **Additional context**
-Add anything else here
+
