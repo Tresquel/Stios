@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Create a bug report so I can fix it
 title: ''
 labels: bug
 assignees: ''
@@ -8,12 +8,12 @@ assignees: ''
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is.
+What is the bug?
 
 **How to recreate the bug**
 
 **Expected behavior**
-A clear and concise description of what you expected to happen.
+What did you expect to happen?
 
 **Additional context**
-Add any other context about the problem here.
+Add anything else here
