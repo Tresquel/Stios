@@ -1,5 +1,4 @@
-#Version 2020.12.23
-
+#Version 0.2.1
 try:
     import os
     import simplejson as json
@@ -7,44 +6,49 @@ try:
 except:
     os.system('pip install simplejson && pip install requests')
     os.system('Stios.py && exit')
+    
 
 Clear = lambda: os.system("cls")
 
-version = "2020.12.23"
+version = "0.2.1"
 
 def Info():
-    print('You are running Stios version ' + version + "\n\n")
-    print("Stios is in very early state\nIf you encounter bugs or random crashes make an issue about them in Stios`s github page (https://github.com/Tresquel/Stios)")
+    Clear()
+    if updateAvailable == True:
+        print('Update available ' + versioncheck + "\n")
+    else:
+        print('You are running Stios version ' + version + "\n\n")
+    print("Stios is in an early state\nIf you encounter bugs or random crashes make an issue about them in Stios's github page (https://github.com/Tresquel/Stios)")
     input("\nPress Enter to continue")
     Menu()
 
 def Menu():
-    if (lastMenu == 1):
+    if lastMenu == 1:
         Settings()
     while True:
-        if (settings['username'] == ""):
+        if settings['username'] == "":
             username = "world"
         else:
             username = settings['username']
         Clear()
-        if (updateAvailable == 1):
+        if updateAvailable == True:
             print("Version " + versioncheck + " is available.\n")
         print('Hello, ' + username + "!\n")
         print('1. Settings')
+        if updateAvailable == True:
+            print('2. Update')
         print('0. Exit')
         
         choiceMenu = input('> ')
-        if choiceMenu.isdigit() and int(choiceMenu) in {1, 0}:
+        if choiceMenu.isdigit() and int(choiceMenu) in {1, 2, 0}:
             choiceMenu = int(choiceMenu)
             break
-        else:
-            Clear()
-            print("Please enter a valid number.")
-            input('press Enter to continue')
-    
     
     if choiceMenu == 1:
         Settings()
+    if updateAvailable == True:
+        if choiceMenu == 2:
+            os.system('start https://github.com/Tresquel/Stios/releases')
     if choiceMenu == 0:
         quit()
 
@@ -62,11 +66,7 @@ def Settings():
         if choiceSettings.isdigit() and int(choiceSettings) in {1, 2, 0}:
             choiceSettings = int(choiceSettings)
             break
-        else:
-            Clear()
-            print("Please enter a valid number.")
-            input('press Enter to continue')
-    
+
     
     if choiceSettings == 1:
         Theme()
@@ -82,10 +82,10 @@ def Theme():
         print('Stios, settings, theme select\n')
         print('1. Default (dark)')
         print('2. Default (light)')
-        if (settings["enablecustomtheme"] == 1):
+        if settings["enablecustomtheme"] == 1:
             print('3. ' + settings["customthemename"])
             print('4. Edit custom theme')
-        if (settings["enablecustomtheme"] == 0):
+        if settings["enablecustomtheme"] == 0:
             print('3. Custom theme setup')
         print('0. Go back to settings')
 
@@ -93,10 +93,6 @@ def Theme():
         if choiceTheme.isdigit() and int(choiceTheme) in {1, 2, 3, 4, 0}:
             choiceTheme = int(choiceTheme)
             break
-        else:
-            Clear()
-            print("Please enter a valid number.")
-            input('press Enter to continue')
         
     if choiceTheme == 1:
         os.system('color 07')
@@ -104,13 +100,13 @@ def Theme():
     if choiceTheme == 2:
         os.system('color 70')
         settings['theme'] = 'light'
-    if (settings["enablecustomtheme"] == 1):
+    if settings["enablecustomtheme"] == 1:
         if choiceTheme == 4:
             CustomThemeSetup()
         if choiceTheme == 3:
             os.system('color ' + settings["customthemecolor"])
             settings['theme'] = 'custom'
-    if (settings["enablecustomtheme"] == 0):
+    if settings["enablecustomtheme"] == 0:
         if choiceTheme == 3:
             CustomThemeSetup()
     if choiceTheme == 0:
@@ -154,10 +150,6 @@ def ChangeUsername1():
         if ChangeUsername1.isdigit() and int(ChangeUsername1) in {1, 2, 0}:
             ChangeUsername1 = int(ChangeUsername1)
             break
-        else:
-            Clear()
-            print("Please enter a valid number.")
-            input('press Enter to continue')
         
     if ChangeUsername1 == 1:
         ChangeUsername2()
@@ -169,7 +161,7 @@ def ChangeUsername2():
     while True:
         lastMenu = 1
         Clear()
-        print('What`s gonna be your new username?')
+        print("What's gonna be your new username?")
         newusername = input('> ')
         if (newusername == ""):
             ChangeUsername1()
@@ -181,11 +173,11 @@ def ChangeUsername2():
 
 def LoadStuff():
     settings['version'] = version
-    if (settings['theme'] == "default"):
+    if settings['theme'] == "default":
         os.system('color 07')
-    if (settings['theme'] == "light"):
+    if settings['theme'] == "light":
         os.system('color 70')
-    if (settings['theme'] == "custom"):
+    if settings['theme'] == "custom":
         os.system('color ' + settings["customthemecolor"])
     with open('files//Stios.json', 'w') as f:
         f.write(json.dumps(settings, indent=4 * ' '))
@@ -193,10 +185,12 @@ def LoadStuff():
 
 versionget = requests.get('https://pastebin.com/raw/u7Gd0wMn')
 versioncheck = versionget.text
-updateAvailable = 0
-if (versioncheck != version):
-    updateAvailable = 1
-    print('Update available ' + versioncheck + "\n")
+updateAvailable = False
+if versioncheck != version:
+    if "debug" in version:
+        updateAvailable = True
+    else:
+        updateAvailable = False
 settings = json.load(open("files//Stios.json", 'r'))
 lastMenu = 0
 
