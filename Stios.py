@@ -189,7 +189,6 @@ def GuessGame():
     GuessAnswer = randint(0, 32767)
     HS = settings["gghs"]
     print("Welcome to the Guessing Game!")
-    print(str(GuessAnswer))
     if HS != 0:
         print("Your highscore is: " + str(HS))
     while True:
