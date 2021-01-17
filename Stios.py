@@ -1,4 +1,4 @@
-# Version 0.2.2
+# Version 0.3.0
 try:
     import os
     from random import randint
@@ -12,7 +12,7 @@ except:
 def Clear(): return os.system("cls")
 
 
-version = "0.2.2"
+version = "0.3.0"
 
 
 def Info():
@@ -29,6 +29,8 @@ def Info():
 def Menu():
     if lastMenu == 1:
         Settings()
+    if lastMenu == 2:
+        AppList()
     while True:
         if settings['username'] == "":
             username = "world"
@@ -39,7 +41,7 @@ def Menu():
             print("Version " + versioncheck + " is available.\n")
         print('Hello, ' + username + "!\n")
         print('1. Settings')
-        print('2. Guess game')
+        print('2. Applications')
         if updateAvailable == True:
             print('3. Update')
         print('0. Exit')
@@ -52,7 +54,7 @@ def Menu():
     if choiceMenu == 1:
         Settings()
     if choiceMenu == 2:
-        GuessGame()
+        AppList()
     if updateAvailable == True:
         if choiceMenu == 3:
             os.system('start https://github.com/Tresquel/Stios/releases')
@@ -183,16 +185,36 @@ def ChangeUsername2():
         f.write(json.dumps(settings, indent=4 * ' '))
 
 
+def AppList():
+    while True:
+        Clear()
+        lastMenu = 2
+        print('1. Guessing game')
+        print('0. Back to menu')
+
+        choiceMenu = input('> ')
+        if choiceMenu.isdigit() and int(choiceMenu) in {1, 0}:
+            choiceMenu = int(choiceMenu)
+            break
+
+        if choiceMenu == 1:
+            GuessGame()
+        if choiceMenu == 0:
+            Menu()
+
+
 def GuessGame():
     Clear()
     GuessCount = 0
     GuessAnswer = randint(0, 32767)
     HS = settings["gghs"]
-    print("Welcome to the Guessing Game!")
+    print("Welcome to the Guessing Game!\nTo exit type 'exit'")
     if HS != 0:
         print("Your highscore is: " + str(HS))
     while True:
         Guess = input("Try and guess my number!\n> ")
+        if Guess == 'exit' or Guess == 'Exit':
+            AppList()
         if Guess.isdigit():
             if int(Guess) << GuessAnswer:
                 print("Higher!")
