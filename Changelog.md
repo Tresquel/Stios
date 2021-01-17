@@ -1,5 +1,6 @@
 ### Version 0.3.0
 - Added a application list (planning on making it customazible)
+- Added an option to quit from the guessing game
 
 ### Version 0.2.2
 - Added a Guessing game
