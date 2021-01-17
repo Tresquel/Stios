@@ -1,3 +1,6 @@
+### Version 0.3.0
+- Added a application list (planning on making it customazible)
+
 ### Version 0.2.2
 - Added a Guessing game
 - Made the loop in the file go to `LoadStuff()` instead of `Menu()`
