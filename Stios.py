@@ -252,10 +252,7 @@ versionget = requests.get('https://pastebin.com/raw/u7Gd0wMn')
 versioncheck = versionget.text
 updateAvailable = False
 if versioncheck != version:
-    if "debug" in version:
-        updateAvailable = True
-    else:
-        updateAvailable = False
+    updateAvailable = True
 settings = json.load(open("files//Stios.json", 'r'))
 lastMenu = 0
 
