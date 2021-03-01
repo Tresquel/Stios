@@ -1,7 +1,10 @@
 # Stios
 This is a little program i was doing when i was bored.
+
 I stopped working on it a while ago and just didnt feel like working on it so its pretty much going to be dead
+
 currently the guessing game is broken i was supposed to fix it but i didnt
+
 **For now its only for Windows.**
 
 [Changelog](https://github.com/Tresquel/Stios/blob/master/Changelog.md)
